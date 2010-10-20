@@ -104,9 +104,8 @@ namespace NullReference.NServiceBus
 
         private static bool VerifyAction<T>(Action<T> a, Expression<Predicate<T>> exp) where T : IMessage
         {
-            NSB.Testing.Test.Initialize();
-
-            var test = exp.Compile().Invoke(NSB.Testing.Test.CreateInstance(a));
+            
+            var test = exp.Compile().Invoke(MessageCreator.CreateMessage(a));
 
             return test;
         }
